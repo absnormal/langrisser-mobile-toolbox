@@ -2,7 +2,7 @@
   "name": "langrisser-mobile-toolbox",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/absnormal/langrisser-mobile-toolbox",
+  "homepage": "https://absnormal.github.io/langrisser-mobile-toolbox",
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
