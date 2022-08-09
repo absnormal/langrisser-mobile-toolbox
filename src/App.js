@@ -34,7 +34,7 @@ const ResponsiveAppBar = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography variant="h6" noWrap component="a" as={NavLink} to="/Home"
+          <Typography variant="h6" noWrap component="a" as={NavLink} to="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -75,7 +75,7 @@ const ResponsiveAppBar = () => {
             noWrap
             component="a"
             as={NavLink}
-            to="/Home"
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -115,7 +115,7 @@ const App = () => {
     <div>
       <ResponsiveAppBar />
       <Routes>
-        <Route exact path="/Home" element={<Home />}></Route>
+        <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/DmgCalc" element={<DmgCalc />}></Route>
       </Routes>
     </div >
