@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/langrisser-mobile-toolbox/static/js/main.9d483ac7.js",
+    "main.js": "/langrisser-mobile-toolbox/static/js/main.eb88ee0e.js",
     "index.html": "/langrisser-mobile-toolbox/index.html",
-    "main.9d483ac7.js.map": "/langrisser-mobile-toolbox/static/js/main.9d483ac7.js.map"
+    "main.eb88ee0e.js.map": "/langrisser-mobile-toolbox/static/js/main.eb88ee0e.js.map"
   },
   "entrypoints": [
-    "static/js/main.9d483ac7.js"
+    "static/js/main.eb88ee0e.js"
   ]
 }
