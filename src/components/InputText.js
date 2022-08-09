@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
@@ -12,19 +12,23 @@ function InputText(props) {
 
 	const handleChange = (event) => {
 		setText(event.target.value);
+
+		// check input type is expected
 		if (onlyNumbers(event.target.value)) setTextType("number");
 		else setTextType("notNumber");
+
+		const inputObject = {
+			id: event.target.id,
+			value: event.target.value
+		};
+
+		// callback to parent component
+		if (onlyNumbers(event.target.value))
+			props.onHandleChange(inputObject);
 	}
 
 	return (
-		<Box
-			component="form"
-			sx={{
-				'& .MuiTextField-root': { m: 1, width: '25ch' },
-			}}
-			noValidate
-			autoComplete="off"
-		>
+		<Box component="form" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} noValidate autoComplete="off" >
 			<div>
 				<TextField
 					error={textType !== props.expectType && textType !== null}
@@ -34,7 +38,7 @@ function InputText(props) {
 					variant="standard"
 					value={text}
 					onChange={handleChange}
-					// prevent hit enter
+					// prevent hit enter key submit
 					// https://github.com/mui/material-ui/issues/5393
 					onKeyPress={(ev) => {
 						if (ev.key === 'Enter') {

@@ -8,12 +8,44 @@ import FormLabel from '@mui/material/FormLabel';
 function RadioRowBtn(props) {
 	const list = props.list;
 
+	const handleChange = (event) => {
+		// get option index
+		var valueIndex = null;
+		list.map(function (name, index) {
+			if (name === event.target.value) valueIndex = index;
+		});
+		if (valueIndex === null) {
+			console.log(event)
+			console.log("RadioRowBtn: can't find event.target.value in list");
+		}
+
+		const inputObject = {
+			id: props.inputId,
+			value: valueIndex
+		};
+
+		// callback to parent component
+		props.onHandleChange(inputObject);
+	}
+
 	return (
-		<FormControl>
-			<FormLabel id="demo-row-radio-buttons-group-label">{props.label}</FormLabel>
-			<RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" defaultValue={list[props.defaultIndex]} name="row-radio-buttons-group">
+		<FormControl id={props.inputId}>
+			<FormLabel id="demo-row-radio-buttons-group-label">
+				{props.label}
+			</FormLabel>
+			<RadioGroup
+				row
+				aria-labelledby="demo-row-radio-buttons-group-label"
+				defaultValue={list[props.defaultIndex]}
+				name="row-radio-buttons-group"
+			>
 				{list.map((value, index) => (
-					<FormControlLabel value={list[index]} control={<Radio />} label={list[index]} />
+					<FormControlLabel
+						control={<Radio />}
+						label={list[index]}
+						value={list[index]}
+						onChange={handleChange}
+					/>
 				))}
 			</RadioGroup>
 		</FormControl >
