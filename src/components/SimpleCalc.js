@@ -1,80 +1,194 @@
 import React, { useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import RadioRowBtn from './RadioRowBtn';
 import InputText from './InputText';
+import SimpleOutput from './SimpleOutput';
 
 function SimpleCalc() {
-	const Item = styled(Paper)(({ theme }) => ({
-		backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-		...theme.typography.body2,
-		padding: theme.spacing(1),
-		textAlign: 'center',
-		color: theme.palette.text.secondary,
-	}));
-
-	const handleInput = (inputObject) => {
-		calcData[inputObject.id] = inputObject.value;
-		console.log(calcData);
-	}
-
-	const calcData = {
-		ATKTYPE: "0",
+	const [calcData, setCalcData] = useState({
+		ATKTYPE: "單點",
 		ATKINT: "1000",
+		ATKINTPERC: "50",
+		DEFMDEFPERC: "0",
 		DEFMDEF: "500",
 		DMGINC1: "30",
-		DMGINC2: "10",
-		DMGINC3: "30",
+		DMGINC2: "0",
+		DMGINC3: "20",
 		DMGDEC1: "30",
-		DMGDEC2: "10",
-		DMGDEC3: "30",
+		DMGDEC2: "0",
+		DMGDEC3: "0",
 		SKILLRATE: "1.5",
-		COUNTER: "0.3"
+		COUNTER: "0.3",
+		TERRAIN: "20",
+		MELEE: "1"
+	});
+
+	const handleValueChanged = (name) => (event) => {
+		setCalcData({ ...calcData, [name]: event.target.value });
 	};
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<Grid container spacing={2}>
-				<Grid item xs={6} md={12}>
-					<Item>
-						<RadioRowBtn onHandleChange={handleInput}
+				<Grid item xs={6} md={12} >
+					<Paper
+						sx={{
+							display: 'flex',
+							flexWrap: 'wrap',
+							'& > :not(style)': {
+								mx: 10, my: 1
+							},
+							textAlign: 'center',
+							justifyContent: 'center'
+						}}
+					>
+						<RadioRowBtn handleValueChanged={handleValueChanged}
 							inputId="ATKTYPE" label="攻擊方式" defaultIndex="0" list={["單點", "範圍"]} />
-					</Item>
+					</Paper>
 				</Grid>
 				<Grid item xs={6} md={6}>
-					<Item>
-						<InputText onHandleChange={handleInput}
-							inputId="ATKINT" label="攻擊/智力" defaultValue="1000" helper="只能包含數字" expectType="number" />
-						<InputText onHandleChange={handleInput}
-							inputId="DMGINC1" label="一般增傷" defaultValue="30" helper="只能包含數字" expectType="number" />
-						<InputText onHandleChange={handleInput}
-							inputId="DMGINC2" label="技能增傷" defaultValue="10" helper="只能包含數字" expectType="number" />
-						<InputText onHandleChange={handleInput}
-							inputId="DMGINC3" label="暴擊增傷" defaultValue="30" helper="只能包含數字" expectType="number" />
-						<InputText onHandleChange={handleInput}
-							inputId="SKILLRATE" label="技能倍率" defaultValue="1.5" helper="只能包含數字" expectType="number" />
-					</Item>
+					<Paper
+						sx={{
+							display: 'flex',
+							flexWrap: 'wrap',
+							'& > :not(style)': {
+								mx: 10, my: 1
+							},
+							textAlign: 'center',
+							justifyContent: 'center'
+						}}
+					>
+						<InputText
+							inputId="ATKINT"
+							label="攻擊/智力進場白字"
+							helper="只能包含數字"
+							value={calcData.ATKINT}
+							handleValueChanged={handleValueChanged}
+						/>
+						<InputText
+							inputId="ATKINTPERC"
+							label="攻擊/智力(%)"
+							helper="只能包含數字"
+							value={calcData.ATKINTPERC}
+							handleValueChanged={handleValueChanged}
+						/>
+						<InputText
+							inputId="DMGINC1"
+							label="一般增傷(%)"
+							helper="只能包含數字"
+							value={calcData.DMGINC1}
+							handleValueChanged={handleValueChanged}
+						/>
+						<InputText
+							inputId="DMGINC2"
+							label="技能增傷(%)"
+							helper="只能包含數字"
+							value={calcData.DMGINC2}
+							handleValueChanged={handleValueChanged}
+						/>
+						<InputText
+							inputId="DMGINC3"
+							label="暴擊增減傷(%)"
+							helper="只能包含數字"
+							value={calcData.DMGINC3}
+							handleValueChanged={handleValueChanged}
+						/>
+						<InputText
+							inputId="SKILLRATE"
+							label="技能倍率"
+							helper="只能包含數字"
+							value={calcData.SKILLRATE}
+							handleValueChanged={handleValueChanged}
+						/>
+						<InputText
+							inputId="MELEE"
+							label="近戰減免"
+							helper="只能包含數字"
+							value={calcData.MELEE}
+							handleValueChanged={handleValueChanged}
+						/>
+					</Paper>
 				</Grid>
 				<Grid item xs={6} md={6}>
-					<Item>
-						<InputText onHandleChange={handleInput}
-							inputId="DEFMDEF" label="防禦/魔防" defaultValue="500" helper="只能包含數字" expectType="number" />
-						<InputText onHandleChange={handleInput}
-							inputId="DMGDEC1" label="一般減傷" defaultValue="30" helper="只能包含數字" expectType="number" />
-						<InputText onHandleChange={handleInput}
-							inputId="DMGDEC2" label="天賦減傷" defaultValue="10" helper="只能包含數字" expectType="number" />
-						<InputText onHandleChange={handleInput}
-							inputId="DMGDEC3" label="指揮減傷" defaultValue="30" helper="只能包含數字" expectType="number" />
-						<InputText onHandleChange={handleInput}
-							inputId="COUNTER" label="克制倍率" defaultValue="0.3" helper="只能包含數字" expectType="number" />
-					</Item>
+					<Paper
+						sx={{
+							display: 'flex',
+							flexWrap: 'wrap',
+							'& > :not(style)': {
+								mx: 10, my: 1
+							},
+							textAlign: 'center',
+							justifyContent: 'center'
+						}}
+					>
+						<InputText
+							inputId="DEFMDEF"
+							label="防禦/魔防進場白字"
+							helper="只能包含數字"
+							value={calcData.DEFMDEF}
+							handleValueChanged={handleValueChanged}
+						/>
+						<InputText
+							inputId="DEFMDEFPERC"
+							label="防禦/魔防(%)"
+							helper="只能包含數字"
+							value={calcData.DEFMDEFPERC}
+							handleValueChanged={handleValueChanged}
+						/>
+						<InputText
+							inputId="DMGDEC1"
+							label="一般減傷(%)"
+							helper="只能包含數字"
+							value={calcData.DMGDEC1}
+							handleValueChanged={handleValueChanged}
+						/>
+						<InputText
+							inputId="DMGDEC2"
+							label="天賦減傷(%)"
+							helper="只能包含數字"
+							value={calcData.DMGDEC2}
+							handleValueChanged={handleValueChanged}
+						/>
+						<InputText
+							inputId="DMGDEC3"
+							label="光環減傷(%)"
+							helper="只能包含數字"
+							value={calcData.DMGDEC3}
+							handleValueChanged={handleValueChanged}
+						/>
+						<InputText
+							inputId="COUNTER"
+							label="克制倍率"
+							helper="只能包含數字"
+							value={calcData.COUNTER}
+							handleValueChanged={handleValueChanged}
+						/>
+						<InputText
+							inputId="TERAIN"
+							label="地形倍率(%)"
+							helper="只能包含數字"
+							value={calcData.TERRAIN}
+							handleValueChanged={handleValueChanged}
+						/>
+					</Paper>
 				</Grid>
 				<Grid item xs={6} md={12}>
-					<Item>
-						xs=6 md=12
-					</Item>
+					<Paper
+						sx={{
+							display: 'flex',
+							flexWrap: 'wrap',
+							'& > :not(style)': {
+								mx: 10, my: 1
+							},
+							textAlign: 'center',
+							justifyContent: 'center'
+						}}
+					>
+						<SimpleOutput calcData={calcData}
+							outputList={["DAMAGE", "CRITDAMAGE"]} labelList={["傷害", "暴擊傷害"]} defaultList={["415.8", "665.28"]} />
+					</Paper>
 				</Grid>
 			</Grid>
 		</Box>
