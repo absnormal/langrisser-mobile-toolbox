@@ -166,7 +166,7 @@ function SimpleCalc() {
 							handleValueChanged={handleValueChanged}
 						/>
 						<InputText
-							inputId="TERAIN"
+							inputId="TERRAIN"
 							label="地形倍率(%)"
 							helper="只能包含數字"
 							value={calcData.TERRAIN}
